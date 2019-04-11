@@ -24,6 +24,7 @@ function createSpeechBubble(res) {
 
                 newDiv.classList.add("talkbubble");
                 newDiv.id = "test"
+                newDiv.innerHTML = ""
                 newDiv.innerHTML = "The fox says your stock is " + match.Ticker + "<br>" + "Company Name: " + match.companyName + "<br>" + "Current Price: " + match.Price;
                 document.body.appendChild(newDiv);
             }
@@ -44,6 +45,7 @@ function createSpeechBubbleName(res) {
                 var newDiv = document.createElement("div");
                 newDiv.classList.add("talkbubble");
                 newDiv.id = "test"
+                newDiv.innerHTML = ""
                 newDiv.innerHTML = "The fox says your stock is " + match.Ticker + "<br>" + "Company Name: " + match.companyName + "<br>" + "Current Price: " + match.Price;
                 document.body.appendChild(newDiv);
             }
