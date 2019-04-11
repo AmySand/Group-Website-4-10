@@ -12,15 +12,29 @@ function randomFox() {
 console.log(randomFox);
 
 
-// function createSpeechBubble(){
-//     var newDiv = document.createElement("div");
-//     console.log(newDiv);
-//     newDiv.classList.add("talkbubble");
-//     var tickerInput = document.querySelector("#ticker-symbol").value;
-//     var companyNameInput = document.querySelector("#company-name").value;
-//     newDiv.innerHTML = "The fox says your stock is " + tickerInput + "<br>" + companyNameInput;
-//     document.body.appendChild(newDiv);
-// }
+function createSpeechBubble(res) {
+    var ticker = tick.value.toUpperCase();
+    for (i = 0; i <= res.length; i++) {
+        // var match = res[i].Ticker.includes(ticker);
+        var match = res[i].Ticker;
+        // if(match === true){
+        if (match === ticker) {
+            console.log(match)
+            match = res[i];
+            var newDiv = document.createElement("div");
+            // console.log(newDiv);
+
+            newDiv.classList.add("talkbubble");
+            newDiv.id = "test"
+
+            // var tickerInput = document.querySelector("#ticker-symbol").value;
+            // var companyNameInput = document.querySelector("#company-name").value;
+            // newDiv.innerHTML = "The fox says your stock is " + tickerInput + "<br>" + companyNameInput;
+            newDiv.innerHTML = "The fox says your stock is " + match.Ticker + "<br>" + "Company Name: " + match.companyName + "<br>" + "Current Price: " + match.Price;
+            document.body.appendChild(newDiv);
+        }
+    }
+}
 // console.log(createSpeechBubble);
 
 // document.getElementById('search').addEventListener("click", function (e) {
@@ -63,8 +77,11 @@ console.log(randomFox);
 
 //Api call to stocks
 var tick = document.getElementById("ticker-symbol");
+
 document.getElementById("searchBtn").addEventListener("click", function (e) {
     e.preventDefault();
+    // randomFox();
+    
     fetch("https://financialmodelingprep.com/api/stock/list/all?datatype=json")
         .then(function (response) {
             console.log(response);
@@ -75,30 +92,33 @@ document.getElementById("searchBtn").addEventListener("click", function (e) {
         })
         .then(function (res) {
             console.log(res);
-            var ticker = tick.value.toUpperCase();
+            // var ticker = tick.value.toUpperCase();
+            createSpeechBubble(res);
+
             // console.log(ticker);
 
-            for(i=0; i<=res.length; i++){
-                var match = res[i].Ticker.includes(ticker);
-                console.log(match)
-                if(match == true){
-                   console.log(match)
-                   match = res[i];
-                //    console.log(match);
-                   var newDivTick = document.createElement("div");
-                   var newDivComp = document.createElement("div");
-                   var newDivPrice = document.createElement("div");
-                   newDivTick.innerHTML =`Ticker: ${match.Ticker}`;
-                   newDivComp.innerHTML = `Company Name: ${match.companyName}`;  
-                   newDivPrice.innerHTML = `Current Price: $${match.Price}`;
-                   document.getElementById("tickerContainer").append(newDivTick);
-                   document.getElementById("tickerContainer").append(newDivComp);
-                   document.getElementById("tickerContainer").append(newDivPrice);
+            // for(i=0; i<=res.length; i++){
+            //     // var match = res[i].Ticker.includes(ticker);
+            //     var match = res[i].Ticker;
+            //     // if(match === true){
+            //         if(match === ticker){
+            //        console.log(match)
+            //        match = res[i];
+            //    console.log(match);
+            //    var newDivTick = document.createElement("div");
+            //    var newDivComp = document.createElement("div");
+            //    var newDivPrice = document.createElement("div");
+            //    newDivTick.innerHTML =`Ticker: ${match.Ticker}`;
+            //    newDivComp.innerHTML = `Company Name: ${match.companyName}`;  
+            //    newDivPrice.innerHTML = `Current Price: $${match.Price}`;
+            //    document.getElementById("tickerContainer").append(newDivTick);
+            //    document.getElementById("tickerContainer").append(newDivComp);
+            //    document.getElementById("tickerContainer").append(newDivPrice);
 
-                } 
-            }
-            })
+
+
         })
+})
 // document.getElementById('searchbtn').addEventListener("click", function(){
 //     fetch("http:\/\/randomfox.ca\/?i=53")
 //     .then(function(response){
@@ -111,4 +131,4 @@ document.getElementById("searchBtn").addEventListener("click", function (e) {
 //     .then(function(res){
 //         console.log(res);
 //     })
-// });
+// })
