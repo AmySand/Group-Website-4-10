@@ -89,30 +89,21 @@
         </form>
     </div>
 
-    
+
 
     <script>
-         var y = Math.floor(Math.random() * 122);
-                    var x = 'https://randomfox.ca/images/'+y+'.jpg'
-                    var z = document.getElementById("fox");
-                    var c = document.createAttribute("src");
-                    c.value = x
-                    z.setAttributeNode(c);
+    //     var y = Math.floor(Math.random() * 122);
+    //     var x = 'https://randomfox.ca/images/' + y + '.jpg'
+    //     // var z = document.getElementById("fox").src = x;
 
-        document.getElementById('searchbtn').addEventListener("click", function(e) {
-            e.preventDefault()
-            fetch("")
-                .then(function (response) {
-                    console.log(response);
-                    if (!response.ok) {
-                        console.log(response.status)
-                    }
-                    return response.json();
-                })
-                .then(function (res) {
-                    
-                })
-});
+    //     document.getElementById('searchbtn').addEventlistener("click", function(){
+    //         var y = Math.floor(Math.random() * 122);
+    //     var x = 'https://randomfox.ca/images/' + y + '.jpg'
+    //     var z = document.getElementById("fox").src = x;
+    //     return z;
+    // })
+
+
     </script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
