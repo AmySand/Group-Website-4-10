@@ -19,7 +19,34 @@ function createSpeechBubble(res) {
         var match = res[i].Ticker;
         // if(match === true){
         if (match === ticker) {
-            console.log(match)
+            // console.log(match)
+            match = res[i];
+            var newDiv = document.createElement("div");
+            // console.log(newDiv);
+
+            newDiv.classList.add("talkbubble");
+            newDiv.id = "test"
+
+            // var tickerInput = document.querySelector("#ticker-symbol").value;
+            // var companyNameInput = document.querySelector("#company-name").value;
+            // newDiv.innerHTML = "The fox says your stock is " + tickerInput + "<br>" + companyNameInput;
+            newDiv.innerHTML = "The fox says your stock is " + match.Ticker + "<br>" + "Company Name: " + match.companyName + "<br>" + "Current Price: " + match.Price;
+            document.body.appendChild(newDiv);
+        }
+    }
+}
+
+function createSpeechBubbleName(res) {
+    var compName = comp.value.toUpperCase();
+    for (i = 0; i <= res.length; i++) {
+        var match = res[i].companyName.toUpperCase()
+        console.log(match)
+        var match1 = match.includes(compName);
+        console.log(match1);
+        // var match = res[i].companyName.toUpperCase;
+        // if(match === true){
+        if (match1 === true) {
+            // console.log(match)
             match = res[i];
             var newDiv = document.createElement("div");
             // console.log(newDiv);
@@ -77,7 +104,7 @@ function createSpeechBubble(res) {
 
 //Api call to stocks
 var tick = document.getElementById("ticker-symbol");
-
+var comp = document.getElementById("company-name");
 document.getElementById("searchBtn").addEventListener("click", function (e) {
     e.preventDefault();
     // randomFox();
@@ -94,7 +121,29 @@ document.getElementById("searchBtn").addEventListener("click", function (e) {
             console.log(res);
             // var ticker = tick.value.toUpperCase();
             createSpeechBubble(res);
+            // createSpeechBubbleName(res);
+        })
+    })
 
+    document.getElementById("searchBtn").addEventListener("click", function (e) {
+        e.preventDefault();
+    fetch("https://financialmodelingprep.com/api/stock/list/all?datatype=json")
+    .then(function (response) {
+        console.log(response);
+        if (!response.ok) {
+            console.log(response.status)
+        }
+        return response.json();
+    })
+    .then(function (res) {
+        console.log(res);
+        // var ticker = tick.value.toUpperCase();
+        // createSpeechBubble(res);
+        createSpeechBubbleName(res);
+    })
+})
+    
+            
             // console.log(ticker);
 
             // for(i=0; i<=res.length; i++){
@@ -117,8 +166,7 @@ document.getElementById("searchBtn").addEventListener("click", function (e) {
 
 
 
-        })
-})
+ 
 // document.getElementById('searchbtn').addEventListener("click", function(){
 //     fetch("http:\/\/randomfox.ca\/?i=53")
 //     .then(function(response){
